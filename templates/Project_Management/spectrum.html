@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}项目管理{% endblock %}
+
+{% block css %}
+<link href="{% static "css/INDEX_index/bootstrap.min.css" %}" rel="stylesheet">
+
+<!-- Libraries CSS Files -->
+
+<link href="{% static "css/INDEX_index/style.css" %}" rel="stylesheet">
+
+<link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
+<style>
+#header {
+    height: 92px;
+    left: 0;
+    top: 0;
+    right: 0;
+    transition: all 0.5s;
+    z-index: 997;
+}
+  
+#header #logo {
+    float: left;
+}
+  
+#header #logo img{
+    width: 40px;
+}
+  
+#header #logo h1 {
+    font-size: 20px;
+    margin: 0;
+    padding: 10px;
+    line-height: 1;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    letter-spacing: 3px;
+    float: right;
+    color: black;
+} 
+
+.tableContainer{
+    text-align: center;
+    display: table;
+    margin: 20px;
+    border-spacing: 15px;
+    width: 100%;
+}
+.tableRow{
+    text-align: center;
+    display: table-row;
+}
+.tableCell{
+    display:table-cell;
+    padding: 10px;
+    width: 300px;
+    vertical-align: top;
+}
+
+#intro{
+    text-align: center;
+    height: 0;
+}
+
+div p {
+    font-size: 25px;
+    margin-top: 5px;
+    padding: 0px;
+    line-height: 1.2;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: black;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<header id="header">
+    <div>
+        <div id="logo">
+            <h1>机器人焊接智能化实验室</h1>
+            <img src="{%static 'images/INDEX_index/sjtu.jpeg'%}">
+        </div>
+    </div>
+</header>
+
+<div class="section-header">
+    <h3 class="section-title">光谱信息监控</h3>
+</div>
+<div style="text-align: center">
+    <img style="width: 600px; height: 300px;" src="{% static 'images/PM/光谱传感器.jpg'%}">
+    <p>
+        通过光谱仪采集焊接过程中的光谱信息
+    </p>
+</div>
+
+
+<section id="intro">
+    <a href="{% url 'Project_Management:equip' 1 %}" class="btn-get-started scrollto">返回</a>
+</section>
+{% endblock %}
+
+{% block script%}
+<script type="text/javascript" src="{% static 'js/canvasjs.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+
+{% endblock %}

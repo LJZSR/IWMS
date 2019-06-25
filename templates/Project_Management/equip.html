@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}设备及传感器介绍{% endblock %}
+{% block css %}
+    <link href="{% static 'css/SM/style.css' %}" rel="stylesheet">
+    <link href="{% static "css/INDEX_index/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+
+    <link href="{% static "css/INDEX_index/style.css" %}" rel="stylesheet">
+
+    <link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
+    <style>
+        section {
+            text-align: center;
+            position: relative;
+        }
+        section p {
+            margin: auto;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            text-align: left;
+            text-indent: 2em;
+            width: 1200px;
+            color: black;
+            font-weight: 500;
+            font-size: 30px;
+        }
+        #btn1 {
+            position: absolute;
+            left: 1420px;
+            top: 70px;
+            color: black;
+            font-weight: 500;
+            font-size: 30px;
+        }
+        #btn2 {
+            position: absolute;
+            left: 1420px;
+            top: 435px;
+            color: black;
+            font-weight: 500;
+            font-size: 30px;
+        }
+        
+        #btn3 {
+            position: absolute;
+            left: 1420px;
+            top: 560px;
+            color: black;
+            font-weight: 500;
+            font-size: 30px;
+        }
+        #btn4 {
+            position: absolute;
+            left: 180px;
+            top: 505px;
+            color: black;
+            font-weight: 500;
+            font-size: 30px;
+        }
+        #btn5 {
+            position: absolute;
+            left: 180px;
+            top: 560px;
+            color: black;
+            font-weight: 500;
+            font-size: 30px;
+        }
+        .tableContainer{
+            text-align: center;
+            display: table;
+            margin: 40px;
+            border-spacing: 5px;
+            width: 100%;
+        }
+        .tableRow{
+            text-align: center;
+            display: table-row;
+        }
+        .tableCell{
+            display:table-cell;
+            vertical-align: top;
+        }
+        .tableCell h2{
+            font-size: 25px;
+            margin: 0px;
+            padding: 0px;
+            line-height: 1;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: black;
+        }
+        .tableCell p{
+            width: 405px;
+            margin: auto;
+            text-align: left;
+            text-indent: 2em;
+            font-size: 20px;
+            margin: 0px;
+            padding: 0px;
+            line-height: 1.2;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: black;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<header id="header">
+    <div>
+        <div id="logo">
+            <h1>机器人焊接智能化实验室</h1>
+            <img src="{%static 'images/INDEX_index/sjtu.jpeg'%}">
+        </div>
+        <a class="btn-get-started scrollto" href="{% url 'INDEX:exit' %}" style="float: right;">退出</a>
+    </div>
+</header>
+
+<div class="section-header">
+    <h3 class="section-title">设备及传感器介绍</h3>
+</div>
+
+<section id="top-section">
+    <div style="position: relative">
+        
+        <a href="{% url 'Project_Management:robot' 1 %}" id="btn1" class="btn-get-started scrollto">机器人</a>
+        <a href="{% url 'Project_Management:current_voltage' 1 %}" id="btn2" class="btn-get-started scrollto">电流电压传感器</a>
+        <a href="{% url 'Project_Management:weldpool' 1 %}" id="btn3" class="btn-get-started scrollto">视觉传感器</a>
+        <a href="{% url 'Project_Management:spectrum' 1 %}" id="btn4" class="btn-get-started scrollto">光谱传感器</a>
+        <a href="{% url 'Project_Management:sound' 1 %}" id="btn5" class="btn-get-started scrollto">声音传感器</a>
+        <br>
+            <img style="width: 1200px; height: 700px;" src="{% static 'images/PM/系统实物图.png'%}">
+        <br>
+        
+        
+    </div>
+</section>
+<br>
+<br>
+<section id="intro" style="height: 50px">
+    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">返回</a>
+</section>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/canvasjs.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+{% endblock %}

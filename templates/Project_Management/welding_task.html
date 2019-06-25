@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}项目管理{% endblock %}
+{% block css %}
+    <!-- DataTables CSS -->
+    <link href="{% static 'BASE/datatables/css/dataTables.bootstrap.css' %}" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="{% static 'BASE/datatables-responsive/dataTables.responsive.css' %}" rel="stylesheet">
+    <!-- Main Stylesheet File -->
+    <link href="{% static 'css/SM/style.css' %}" rel="stylesheet">
+    <link href="{% static "css/INDEX_index/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+
+    <link href="{% static "css/INDEX_index/style.css" %}" rel="stylesheet">
+
+    <link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
+    <style>
+    .button {
+        display: inline-block;
+        padding: 5px 10px;
+        font-size: 8;
+        cursor: pointer;
+        text-align: center;   
+        text-decoration: none;
+        outline: none;
+        color: #000;
+        background-color: #fff;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+            }
+
+    .button:hover {background-color: #337ab7}
+
+    .button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+        }
+
+        #header{
+            height: 50px;
+        }
+
+        .tableContainer{
+            display: table;
+            width: 100%;
+            padding: 0 50px 0 50px;
+        }
+        .tableRow{
+            display: table-row;
+        }
+        .tableCell{
+            display:table-cell;
+            border: black 5px solid;
+            width: 400px;
+            height: 560px;
+            position: relative;
+        }
+
+        .tableCell2{
+            display:table-cell;
+            width: 400px;
+            height: 560px;
+            position: relative;
+        }
+
+        .tableCell h2{
+            text-align: center;
+            padding: 5px;
+            margin: 20px 0 10px 0;
+            color: black;
+            font-weight: 500;
+            font-size: 30px;
+        }
+
+        #rooml {
+            border-right: 0px;
+
+        }
+        #roomr {
+            border-left: 0px;
+
+        }
+
+        .tableCell p{
+            text-align: center;
+            color: black;
+            font-weight: 500;
+            font-size: 25px;
+            margin: 0 15px 20px 25px;
+        }
+
+        .tableCell ol{
+            margin: 0 10px 0 10px;
+        }
+
+        .tableCell li{
+            font-weight: 500;
+            font-size: 20px;
+            color: black;
+        }
+
+        .tableCell img{
+            padding: 15px;
+            float: right;
+        }
+
+        #workarea{
+            width: 94%;
+            text-align: center;
+            border: black 5px solid;
+            margin: 20px 50px 10px 50px;
+            color: black;
+            font-weight: 500;
+            font-size: 30px;
+            padding: 125px;
+            height: 280px;
+        }
+
+        hr{
+            color: red;
+            border: 10px red solid;
+        }
+
+        #intro{
+            text-align: center;
+            height: 0;
+        }
+    </style>
+    <style>
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 10%;
+    }
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    </style>
+    <style type="text/css">
+        .clear { clear: both; }
+        #page-wrap { width: 800px; margin: 40px auto 60px; }
+        dl {width: 600px;float: left;}
+        #pic { width: 200px;height: 240px;float: right; margin: -70px 50px 0 -50px; }
+        dt { font-style: italic; font-weight: bold; font-size: 18px; text-align: right; padding: 0 26px 0 0; width: 150px; float: left; height: 120px; border-right: 1px solid #999;  }
+        dd { width: 400px; float: right; padding: 0 0px 0 10px}
+        dd.clear { float: none; margin: 0; height: 15px; }
+    </style>
+    <style type="text/css">
+    </style>
+{% endblock %}
+
+{% block content %}
+    <!-- #header -->
+    <header id="header">
+        <div>
+            <div id="logo">
+                <h1>机器人焊接智能化实验室</h1>
+                <img src="{%static 'images/INDEX_index/sjtu.jpeg'%}">
+            </div>
+        </div>
+    </header>
+    <div class="tableContainer">
+        <div class="tableRow">
+            <div class="tableCell">
+                <div style="height: 300px">
+                    <h2>208平台</h2>
+                    <p>中厚板双机器人焊接系统</p>
+                    <ol>
+                        <li type="I">视觉传感器装置研究及优化设计</li>
+                        <li type="I">焊缝熔池图像处理及位置提取</li>
+                    </ol>
+                </div>
+
+                
+                <img src="{% static 'images/PM/208.jpg' %}">
+            </div>
+            <div class="tableCell" id="rooml">
+                <div style="height: 300px">
+                    <h2>204平台/2</h2>
+                    <p>铝合金GTAW动态过程信息获取及质量控制平台</p>
+                    <ol>
+                        <li type="I">光谱信息</li>
+                        <li type="I">声音信息</li>
+                        <li type="I">电弧电压信息</li>
+                        <li type="I">焊缝图像信息</li>
+                    </ol>
+                </div>
+                
+                <img src="{% static 'images/PM/204:2.jpg' %}">
+            </div>
+            <div class="tableCell" id="roomr">
+                <div style="height: 300px">
+                    <h2>204平台/1</h2>
+                    <p>越障全位置自主焊接机器人</p>
+                    <ol>
+                        <li type="I">智能化焊接传感系统</li>
+                        <li type="I">红外/超声传感</li>
+                        <li type="I">宏观环境识别视觉传感器</li>
+                    </ol>
+                </div>         
+                <img src="{% static 'images/PM/204:1.jpg' %}">
+            </div>
+            <div class="tableCell">
+                <div style="height: 300px">
+                    <h2>202平台</h2>
+                    <p>机器人焊接过程及系统监控平台</p>
+                    <ol>
+                        <li type="I">机器人位姿信息</li>
+                        <li type="I">视觉信息</li>
+                        <li type="I">焊接电流电压信息</li>
+                        <li type="I">声音信息</li>
+                    </ol>
+                </div>
+                
+                <a href="{% url 'Project_Management:intro' 1 %}"><img src="{% static 'images/PM/202.jpg' %}"></a>
+                <section id="intro">
+                    <a href="{% url 'Project_Management:intro' 1 %}" class="btn-get-started scrollto">进入监控平台</a>
+                </section>
+            </div>
+        </div>
+    </div>
+    <p id="workarea">
+        办公学习区域
+    </p>
+    <hr>
+    <div class="tableContainer">
+        <div class="tableRow">
+            <div class="tableCel2">
+
+            </div>
+            
+            <div class="tableCell">
+                <h2>105平台</h2>
+                <p>激光增材制造系统</p>
+                <ol>
+                    <li type="I">自动化涂层技术</li>
+                    <li type="I">熔覆层厚度的实时检测</li>
+                </ol>
+                <img src="{% static 'images/PM/105.png' %}">
+            </div>
+            <div class="tableCell">
+                <h2>102平台</h2>
+                <p>双臂机器人打磨系统</p>
+                <ol>
+                    <li type="I">机器人的动力学控制</li>
+                    <li type="I">机器人的精度控制</li>
+                </ol>
+                <img src="{% static 'images/PM/102.png' %}">
+            </div>
+            <div class="tableCell2">
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

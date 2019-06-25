@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}焊接机器人位姿监控{% endblock %}
+{% block css %}
+    <link href="{% static 'css/SM/style.css' %}" rel="stylesheet">
+    <link href="{% static "css/INDEX_index/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+
+    <link href="{% static "css/INDEX_index/style.css" %}" rel="stylesheet">
+
+    <link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
+    <style>
+        section {
+            text-align: center;
+        }
+        section p {
+            margin: auto;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            text-align: left;
+            text-indent: 2em;
+            width: 1200px;
+            color: black;
+            font-weight: 500;
+            font-size: 30px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<header id="header">
+    <div>
+        <div id="logo">
+            <h1>机器人焊接智能化实验室</h1>
+            <img src="{%static 'images/INDEX_index/sjtu.jpeg'%}">
+        </div>
+        <a class="btn-get-started scrollto" href="{% url 'INDEX:exit' %}" style="float: right;">退出</a>
+    </div>
+</header>
+
+<div class="section-header">
+    <h3 class="section-title">焊接机器人位姿监控</h3>
+</div>
+
+<section id="top-section">
+    <p id="robot"></p>
+</section>
+
+<section id="intro" style="height: 50px">
+    <a href="{% url 'Project_Management:equip' 1 %}" class="btn-get-started scrollto">返回</a>
+</section>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/canvasjs.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script>
+        window.onload = function () {
+            $(document).ready(function () {
+                var Socket = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_robot/1/");
+                Socket.onopen = function () { }
+                Socket.onmessage = function (jdata) {
+                    var tmpdata;
+                    tmpdata = JSON.parse(jdata.data)['robot'];
+                    document.getElementById('robot').innerHTML = tmpdata;
+                }
+            })
+        }
+    </script>
+    
+
+{% endblock %}

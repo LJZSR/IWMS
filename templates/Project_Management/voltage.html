@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}项目管理{% endblock %}
+
+{% block css %}
+<link href="{% static "css/INDEX_index/bootstrap.min.css" %}" rel="stylesheet">
+
+<!-- Libraries CSS Files -->
+
+<link href="{% static "css/INDEX_index/style.css" %}" rel="stylesheet">
+
+<link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
+<style>
+#header {
+    height: 92px;
+    left: 0;
+    top: 0;
+    right: 0;
+    transition: all 0.5s;
+    z-index: 997;
+}
+  
+#header #logo {
+    float: left;
+}
+  
+#header #logo img{
+    width: 40px;
+}
+  
+#header #logo h1 {
+    font-size: 20px;
+    margin: 0;
+    padding: 10px;
+    line-height: 1;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    letter-spacing: 3px;
+    float: right;
+    color: black;
+} 
+
+#chartContainer {
+    height: 300px;
+    width: 90%;
+    margin-left: 5%;
+}
+
+#robot{
+    text-indent: 0;
+    padding: 10px;
+    font-size: 18px;
+    line-height: 1.3;
+    letter-spacing: 3px;
+    font-weight: 500;
+}
+
+#intro{
+    text-align: center;
+    height: 0;
+}
+
+.tableContainer{
+    text-align: center;
+    display: table;
+    margin: 20px;
+    border-spacing: 15px;
+    width: 100%;
+}
+.tableRow{
+    text-align: center;
+    display: table-row;
+}
+.tableCell{
+    display:table-cell;
+    padding: 10px;
+    width: 300px;
+    vertical-align: top;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<header id="header">
+    <div>
+        <div id="logo">
+            <h1>机器人焊接智能化实验室</h1>
+            <img src="{%static 'images/INDEX_index/sjtu.jpeg'%}">
+        </div>
+    </div>
+</header>
+<div class="tableContainer">
+    <div class="tableRow">
+        <div class="tableCell">
+            <div id="chartContainer1" style="height: 400px; width: 100%;"></div>
+        </div>
+        <div class="tableCell">
+            <div id="chartContainer2" style="height: 400px; width: 100%;"></div>
+        </div>
+    </div>
+    <div class="tableRow">
+        <div class="tableCell">
+            <div id="chartContainer3" style="height: 400px; width: 100%;"></div>
+        </div>
+        <div class="tableCell">
+        </div>
+    </div>
+</div>
+<section id="intro">
+    <a href="http://127.0.0.1:8000/Project_Management/welding_task_detail/1/" class="btn-get-started scrollto">返回</a>
+</section>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/canvasjs.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script>
+        window.onload = function () {
+        $(document).ready(function () {
+
+            var dps4 = [];
+            var chart4 = new CanvasJS.Chart("chartContainer1", {
+                title: {
+                    text: "电压信号"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps4,
+                }]
+            });
+
+            chart4.render();
+
+            var dps5 = [];
+            var chart5 = new CanvasJS.Chart("chartContainer2", {
+                title: {
+                    text: "电压频域特征"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps5,
+                }]
+            });
+
+            chart5.render();
+
+            var dps6 = [];
+            var chart6 = new CanvasJS.Chart("chartContainer3", {
+                title: {
+                    text: "电压时域特征"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps6,
+                }]
+            });
+
+            chart6.render();
+
+            var xVal4 = 0;
+            var yVal4 = 0;
+            var xVal5 = 0;
+            var yVal5 = 0;
+            var xVal6 = 0;
+            var yVal6 = 0;
+            var Socket2 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_voltage/1/");
+            Socket2.onopen = function () { }
+            Socket2.onmessage = function (jdata) {
+                var flag, tmpdata1, tmpdata2, tmpdata3, tmpdata4;
+                dps5.length = 0;
+                flag = parseInt(JSON.parse(jdata.data)['flag']);
+                if  (flag === 0) {
+                    xVal4 = 0;
+                    xVal5 = 0;
+                    xVal6 = 0;
+                }
+                tmpdata1 = JSON.parse(jdata.data)['voltage'];
+                tmpdata2 = JSON.parse(jdata.data)['FFTx'];
+                tmpdata3 = JSON.parse(jdata.data)['FFTy'];
+                tmpdata4 = JSON.parse(jdata.data)['pow'];
+                for (var i = 0; i < tmpdata1.length; ++i) {
+                    xVal4 = xVal4 + 0.5/tmpdata1.length;
+                    yVal4 = parseFloat(tmpdata1[i]);
+                    dps4.push({ x: xVal4, y: yVal4 });
+                }
+                if (dps4.length > 8000) {
+                    for (var i = 0; i < 800; ++i) {
+                        dps4.shift();
+                        }
+                }
+                if (dps6.length > 20) {
+                    for (var i = 0; i < 2; ++i) {
+                        dps6.shift();
+                        }
+                }
+                for (var i=0; i<tmpdata2.length; ++i) {
+                    xVal5 = parseFloat(tmpdata2[i]);
+                    yVal5 = parseFloat(tmpdata3[i]);
+                    dps5.push({ x: xVal5, y: yVal5});
+                }
+                yVal6 = parseFloat(tmpdata4)
+                dps6.push({ x: xVal6, y: yVal6});
+                xVal6 = xVal6 + 0.5;
+                chart4.render();
+                chart5.render();
+                chart6.render();
+            }
+        });
+    } 
+
+    </script>
+{% endblock %}

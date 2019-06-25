@@ -1,0 +1,391 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}焊接过程多元传感信息监控平台{% endblock %}
+{% block css %}
+    <link href="{% static 'css/SM/style.css' %}" rel="stylesheet">
+    <link href="{% static "css/INDEX_index/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+
+    <link href="{% static "css/INDEX_index/style.css" %}" rel="stylesheet">
+
+    <link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
+    <style>
+        #top-section{
+            text-align: center;
+            border-bottom: 2px solid black;
+        }
+        #top-section img{
+            height: 256px;
+        }
+        #top-section p{
+            font-size: 20px;
+            margin: 20px;
+            padding: 10px 0px 10px 0px;
+            line-height: 1;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: black;
+        }
+        
+        #monitordiv {
+            display: table-cell;
+            text-align: center;
+            padding: 10px 20px 20px 40px;
+            margin: 10px;
+        }
+        .tableContainer{
+            text-align: center;
+            display: table;
+            margin: 20px;
+            border-spacing: 15px;
+            width: 100%;
+        }
+        .tableRow{
+            text-align: center;
+            display: table-row;
+        }
+        .tableCell{
+            display:table-cell;
+            padding: 10px;
+            width: 300px;
+            vertical-align: top;
+        }
+        .tableCell h2{
+            font-size: 30px;
+            margin: 0px;
+            padding: 0px;
+            line-height: 1;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: black;
+        }
+        .tableCell p{
+            text-align: left;
+            text-indent: 2em;
+            font-size: 20px;
+            margin: 0px;
+            padding: 0px;
+            line-height: 1.2;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: black;
+        }
+        #robot{
+            text-indent: 0;
+            padding: 10px;
+            font-size: 18px;
+            line-height: 1.3;
+            letter-spacing: 3px;
+            font-weight: 500;
+        }
+        #weldpoolPic{
+            width: 90%;
+        }
+        #intro{
+            text-align: center;
+            height: 0;
+        }
+
+    </style>
+    <style>
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%;
+    }
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    </style>
+    <style type="text/css">
+        .clear { clear: both; }
+        #page-wrap { width: 800px; margin: 40px auto 60px; }
+        dl {width: 600px;float: left;}
+        #pic { width: 200px;height: 240px;float: right; margin: -70px 50px 0 -50px; }
+        dt { font-style: italic; font-weight: bold; font-size: 18px; text-align: right; padding: 0 26px 0 0; width: 150px; float: left; height: 120px; border-right: 1px solid #999;  }
+        dd { width: 400px; float: right; padding: 0 0px 0 10px}
+        dd.clear { float: none; margin: 0; height: 15px; }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<header id="header">
+    <div>
+        <div id="logo">
+            <h1>机器人焊接智能化实验室</h1>
+            <img src="{%static 'images/INDEX_index/sjtu.jpeg'%}">
+        </div>
+        <a class="btn-get-started scrollto" href="{% url 'INDEX:exit' %}" style="float: right;">退出</a>
+    </div>
+</header>
+
+<div class="section-header">
+    <h3 class="section-title">焊接过程多元传感信息监控平台</h3>
+</div>
+
+<section id="top-section">
+    <div>
+        <!--
+            <img src="{% static 'images/PM/多信息传感监控.png'%}">
+            <img id='monitorpic' src=''>
+        -->
+        <a href="http://127.0.0.1:8000/Project_Management/monitor/1/" class="btn-get-started scrollto">
+            <img style="width: 1200px; height: 400px;" src="{% static 'images/PM/多信息传感监控.jpg'%}">
+        </a>       
+    </div>
+    <!--
+    <p>
+        全面监控焊接过程中的声音信号、熔池图像信号、电流电压信号和机器人运动参数
+    </p>
+    --> 
+</section>
+
+<!-- /.row -->
+
+<div class="tableContainer">
+    <div class="tableRow">
+        <div class="tableCell">
+            <h2>声音信号监控</h2>
+        </div>
+        <div class="tableCell">
+            <h2>熔池图像信号监控</h2>
+        </div>
+        <div class="tableCell">
+            <h2>电流电压信号监控</h2>
+        </div>
+        <div class="tableCell">
+            <h2>光谱信息监控</h2>
+        </div>
+        <div class="tableCell">
+            <h2>机器人运动参数监控</h2>
+        </div>
+    </div>
+    <div class="tableRow">
+        <div class="tableCell">
+            <div>
+                <a href="http://127.0.0.1:8000/Project_Management/1/sound">
+                    <img src="{% static 'images/PM/声音传感器.jpg'%}">
+                </a>
+            </div>
+            <br>
+            <p>
+                通过声音传感器采集焊接过程中的声音信号
+            </p>
+        </div>
+        <div class="tableCell">
+            <div>
+                <a href="http://127.0.0.1:8000/Project_Management/1/weldpool">
+                    <img src="{% static 'images/PM/视觉传感器.jpg'%}">
+                </a>
+            </div>
+            <br>
+            <p>
+                通过CCD相机采集焊接过程中的熔池图像信号
+            </p>
+        </div>
+        <div class="tableCell">
+            <div>
+                <!--
+                    <a href="http://127.0.0.1:8000/Project_Management/1/current">
+                        <img src="{% static 'images/PM/电流传感器.png'%}">
+                    </a>
+                    <a href="http://127.0.0.1:8000/Project_Management/1/voltage">
+                        <img src="{% static 'images/PM/电压传感器.png'%}">
+                    </a>
+                -->
+                <a href="http://127.0.0.1:8000/Project_Management/1/current_voltage">
+                    <img src="{% static 'images/PM/电流电压传感器.jpg'%}">
+                </a>    
+            </div>
+            <br>
+            <p>
+                通过电流电压传感器采集焊接过程中的电流电压信号
+            </p>
+        </div>
+        <div class="tableCell">
+            <div>
+                <img src="{% static 'images/PM/光谱传感器.jpg'%}">
+            </div>
+            <br>
+            <p>
+                通过光谱仪采集焊接过程中的光谱信息
+            </p>
+        </div>
+        <div class="tableCell">
+            <div>
+                <img src="{% static 'images/PM/机器人位姿监控.jpg'%}">
+            </div>
+            <br>
+            <p>
+                通过机器人位姿监控系统采集机器人位姿信息
+            </p>
+        </div>
+    </div>
+    <div class="tableRow">
+        <div class="tableCell">
+            <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+        </div>
+        <div class="tableCell">
+            <img id='weldpoolPic' src=''>
+        </div>
+        <div class="tableCell">
+            <div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+            
+        </div>
+        <div class="tableCell">
+            
+        </div>
+        <div class="tableCell">
+            <p id="robot"></p>
+        </div>
+    </div>
+
+</div>
+<section id="intro">
+    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">返回</a>
+</section>
+
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/canvasjs.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script>
+        window.onload = function () {
+        $(document).ready(function () {
+
+            var dps1 = [];
+            var dps2 = [];
+
+            var chart1 = new CanvasJS.Chart("chartContainer1", {
+                title: {
+                    text: "Sound"
+                },
+                // axisX: {
+                //     title: "Time"
+                // },
+                // axisY: {
+                //     title: "Sound"
+                // },
+                data: [{
+                    type: "line",
+                    dataPoints: dps1,
+                }]
+            });
+
+            var chart2 = new CanvasJS.Chart("chartContainer2", {
+                title: {
+                    text: "Current"
+                },
+                // axisX: {
+                //     title: "Time",
+                // },
+                // axisY: {
+                //     title: "Current",
+                // },
+                data: [{
+                    type: "line",
+                    dataPoints: dps2,
+                }]
+            });
+            
+
+            chart1.render();
+            chart2.render();
+            var xVal1 = 0;
+            var xVal2 = 0;
+            var yVal1 = 0;
+            var yVal2 = 0;
+
+            var Socket1 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_sound/1/summary/");
+            Socket1.onopen = function () { }
+            Socket1.onmessage = function (jdata) {
+                var flag, tmpdata;
+                flag = parseInt(JSON.parse(jdata.data)['flag']);
+                if  (flag === 0) xVal1 = 0;
+                tmpdata = JSON.parse(jdata.data)['sound'];
+                for (var i = 0; i < 200; ++i) {
+                    xVal1 += 0.0025;
+                    yVal1 = parseFloat(tmpdata[i]);
+                    dps1.push({ x: xVal1, y: yVal1 });
+                    }
+                if (dps1.length > 1000) {
+                    for (var i = 0; i < 200; ++i) {
+                        dps1.shift();
+                        }
+                    }
+                chart1.render();
+            }
+
+            var Socket2 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_current/1/summary/");
+            Socket2.onopen = function () { }
+            Socket2.onmessage = function (jdata) {
+                var flag, tmpdata;
+                flag = parseInt(JSON.parse(jdata.data)['flag']);
+                if  (flag === 0) xVal2 = 0;
+                //console.log(xVal1)
+                tmpdata = JSON.parse(jdata.data)['current'];
+                for (var i = 0; i < 200; ++i) {
+                    xVal2 += 0.0025;
+                    yVal2 = parseFloat(tmpdata[i]);
+                    dps2.push({ x: xVal2, y: yVal2 });
+                    }
+                if (dps2.length > 1000) {
+                    for (var i = 0; i < 200; ++i) {
+                        dps2.shift();
+                        }
+                    }
+                chart2.render();
+            }
+
+            
+            var Socket3 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_robot/1/");
+            Socket3.onopen = function () { }
+            Socket3.onmessage = function (jdata) {
+                var tmpdata;
+                tmpdata = JSON.parse(jdata.data)['robot'];
+                document.getElementById('robot').innerHTML = tmpdata;
+            }
+
+
+            var Socket4 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_weldpool/1/summary/");
+            Socket4.onopen = function () { }
+            Socket4.onmessage = function (jdata) {
+            document.getElementById('weldpoolPic').src = "data:image/jpg;base64," + JSON.parse(jdata.data)['weldpoolPic'];                
+            }
+        });
+    } 
+
+    </script>
+{% endblock %}

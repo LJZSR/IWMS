@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+    <head>
+        
+        <meta charset="utf-8">
+        <title>Intelligent Welding Management System</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Fonts -->
+    
+        <!-- Bootstrap CSS File -->
+
+        <link href="{% static "css/INDEX_index/bootstrap.min.css" %}" rel="stylesheet">
+
+        <!-- Libraries CSS Files -->
+        
+        <link href="{%static "css/INDEX_index/style.css"%}" rel="stylesheet">
+    
+        <link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
+    
+
+        <!-- Main Stylesheet File -->
+        <style>
+
+
+            #header {
+            height: 80px;
+            left: 0;
+            top: 0;
+            right: 0;
+            transition: all 0.5s;
+            z-index: 997;
+            }
+
+            #header #logo {
+            float: left;
+            }
+
+            #header #logo img{
+            width: 70px;
+            }
+
+            #header #logo h1 {
+            font-size: 40px;
+            margin: 0;
+            padding: 10px;
+            line-height: 1;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            letter-spacing: 3px;
+            float: right;
+            color: black;
+            }
+
+            .carousel-container {
+                background-image: url("{% static 'images/INDEX_index/30.jpg' %}");
+                background-size: 100% 100%;
+                background-image: no-repeat;
+            }
+
+            #intro h2 {
+                color: black;
+                margin-bottom: 0px;
+                font-size: 48px;
+                font-weight: 700;
+            }
+
+            #intro h3 {
+                color: black;
+                margin-bottom: 20px;
+                font-size: 35px;
+                font-weight: 700;
+            }
+
+            #intro h4 {
+                color: black;
+                margin-bottom: 20px;
+                font-size: 30px;
+                font-weight: 700;
+            }
+
+           #intro #main-page {
+                border-spacing: 2px;
+                display: table;
+            }
+            #intro #main-page img{
+                width: 100%;
+                height: 100%;
+            }
+
+            #intro .tableContainer {
+                width: 100%;
+                border-spacing: 10px;
+                display: table;
+            }
+
+
+            #intro .tableRow {
+                display: table-row;
+            }
+            
+
+            #intro .tableRow .tableCell {
+                display: table-cell;
+                /*padding: 0 20px 0 20px;*/
+                font-size: 20px;
+                font-weight: 500;
+
+            }
+
+            #intro p {
+                font-weight: 500;
+                width: 65%;
+                color: black;
+                font-size: 20px;
+                text-align: left;
+                text-indent: 2em;
+            }
+
+            #intro li {
+                font-size: 20px;
+                font-weight: 500;
+            }
+
+            #intro #mainpeople{
+                border-bottom: 1px grey solid;
+            }
+
+            hr {
+                height: 1px;
+                background-color: grey;
+            }
+        </style>
+
+
+    
+    </head>
+
+    <body>
+        <!-- #header -->
+
+        <section id="intro">
+            <div class="intro-container">
+                <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+                    <ol class="carousel-indicators"></ol>
+                    
+                
+                    <div class="carousel-inner" role="listbox">
+
+                        <div class="carousel-item active">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <div class="tableContainer">
+                                        <div class="tableRow">
+                                            <div class="tableCell">
+                                                <img src="{% static 'images/INDEX_index/main.png' %}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                        
+                                    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">进入信息监控平台</a>
+                                </div>
+                    
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>机器人焊接智能化实验室概况</h2>
+                                    <div class="tableContainer">
+                                        <div class="tableRow">
+                                            <div class="tableCell">
+                                                <img src="{% static 'images/INDEX_index/1.png' %}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                        
+                                    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">进入信息监控平台</a>
+                                </div>
+                    
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>机器人焊接智能化实验室概况</h2>
+                                    <div class="tableContainer">
+                                        <div class="tableRow">
+                                            <div class="tableCell">
+                                                <img src="{% static 'images/INDEX_index/2.png' %}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                        
+                                    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">进入信息监控平台</a>
+                                </div>
+                    
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>机器人焊接智能化实验室概况</h2>
+
+                                    <div class="tableContainer">
+                                        <div class="tableRow">
+                                            <div class="tableCell">
+                                                <img src="{% static 'images/INDEX_index/3.png' %}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">进入信息监控平台</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>机器人焊接智能化实验室概况</h2>
+                                    <div class="tableContainer">
+                                        <div class="tableRow">
+                                            <div class="tableCell">
+                                                <img src="{% static 'images/INDEX_index/4.png' %}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">进入信息监控平台</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>机器人焊接智能化实验室概况</h2>
+                                    <div class="tableContainer">
+                                        <div class="tableRow">
+                                            <div class="tableCell">
+                                                <img src="{% static 'images/INDEX_index/5.png' %}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href=" {% url 'Project_Management:welding_task' %} " class="btn-get-started scrollto">进入信息监控平台</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+    
+                        <div class="carousel-item">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>机器人焊接智能化实验室概况</h2>
+                                    <div class="tableCell">
+                                        <img src="{% static 'images/INDEX_index/6.png' %}">
+                                    </div>
+                                    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">进入信息监控平台</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2>机器人焊接智能化实验室概况</h2>
+                                    <div class="tableCell">
+                                        <img src="{% static 'images/INDEX_index/7.png' %}">
+                                    </div>
+                                    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">进入信息监控平台</a>
+                                </div>
+                            </div>
+                        </div>
+
+                
+                    </div>
+
+                    <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+
+                    <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+
+                </div>
+            </div>
+        </section><!-- #intro -->
+
+        <!-- JavaScript Libraries -->
+        <script src="{%static "js/INDEX_index/jquery.min.js"%}"></script>
+    
+        <script src="{%static "js/INDEX_index/bootstrap.bundle.min.js"%}"></script>
+    
+    
+        <script src="{%static "js/INDEX_index/superfish.min.js"%}"></script>
+        <script src="{%static "js/INDEX_index/wow.min.js"%}"></script>
+
+    
+
+        <!-- Template Main Javascript File -->
+        <script src="{%static "js/INDEX_index/main.js"%}"></script>
+
+    </body>
+</html>
