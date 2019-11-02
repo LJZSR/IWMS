@@ -13,68 +13,83 @@
 
 <link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
 <style>
-#header {
-    height: 92px;
-    left: 0;
-    top: 0;
-    right: 0;
-    transition: all 0.5s;
-    z-index: 997;
-}
-  
-#header #logo {
-    float: left;
-}
-  
-#header #logo img{
-    width: 40px;
-}
-  
-#header #logo h1 {
-    font-size: 20px;
-    margin: 0;
-    padding: 10px;
-    line-height: 1;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    letter-spacing: 3px;
-    float: right;
-    color: black;
-} 
+    #header {
+        height: 92px;
+        left: 0;
+        top: 0;
+        right: 0;
+        transition: all 0.5s;
+        z-index: 997;
+    }
+    
+    #header #logo {
+        float: left;
+    }
+    
+    #header #logo img{
+        width: 40px;
+    }
+    
+    #header #logo h1 {
+        font-size: 20px;
+        margin: 0;
+        padding: 10px;
+        line-height: 1;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        letter-spacing: 3px;
+        float: right;
+        color: black;
+    } 
 
-.tableContainer{
-    text-align: center;
-    display: table;
-    margin: 20px;
-    border-spacing: 15px;
-    width: 100%;
-}
-.tableRow{
-    text-align: center;
-    display: table-row;
-}
-.tableCell{
-    display:table-cell;
-    padding: 10px;
-    width: 300px;
-    vertical-align: top;
-}
+    .tableContainer{
+        text-align: center;
+        display: table;
+        margin: 20px;
+        border-spacing: 15px;
+        width: 100%;
+    }
+    .tableRow{
+        text-align: center;
+        display: table-row;
+    }
+    .tableCell{
+        display:table-cell;
+        padding: 10px;
+        width: 300px;
+        vertical-align: top;
+    }
 
-#intro{
-    text-align: center;
-    height: 0;
-}
+    #intro{
+        text-align: center;
+        height: 0;
+    }
 
-div p {
-    font-size: 25px;
-    margin-top: 5px;
-    padding: 0px;
-    line-height: 1.2;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    letter-spacing: 3px;
-    color: black;
-}
+    div p {
+        font-size: 35px;
+        margin-top: 5px;
+        padding: 0px;
+        line-height: 1.2;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        letter-spacing: 3px;
+        color: black;
+    }
+
+    .section-header h1 {
+        font-size: 50px;
+        color: #111;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 15px;
+        margin: 0;
+    }
+    .section-header h3 {
+        font-size: 35px;
+    }
+    
 </style>
 {% endblock %}
 
@@ -90,7 +105,8 @@ div p {
 </header>
 
 <div class="section-header">
-    <h3 class="section-title">熔池图像信号监控</h3>
+    <h1 class="section-title">熔池图像信号监控</h1>
+    <h3 class="section-title">Weld pool image signal monitoring</h3>
 </div>
 <div style="text-align: center">
     <img style="width: 400px; height: 300px;" src="{% static 'images/PM/视觉传感器.jpg'%}">
@@ -99,13 +115,16 @@ div p {
     </p>
 </div>
 
+<div style="text-align: center">
+    <img style="width: 800px; height: 800px;" id='weldpoolPic1' src=''>
+</div>
 <div class="tableContainer">
     <div class="tableRow">
         <div class="tableCell">
-            <img style="width: 480px; height: 384px;" id='weldpoolPic' src=''>
+            <div id="chartContainer1" style="height: 400px; width: 100%;"></div>
         </div>
         <div class="tableCell">
-            
+            <div id="chartContainer2" style="height: 400px; width: 100%;"></div>
         </div>
     </div>
 </div>
@@ -120,10 +139,68 @@ div p {
 <script>
     window.onload = function () {
         $(document).ready(function () {
-            var Socket1 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_weldpool/1/summary/");
-            Socket1.onopen = function () { }
-            Socket1.onmessage = function (jdata) {
-            document.getElementById('weldpoolPic').src = "data:image/jpg;base64," + JSON.parse(jdata.data)['weldpoolPic'];
+
+            var dps1 = [];
+            var chart1 = new CanvasJS.Chart("chartContainer1", {
+                title: {
+                    text: "熔池面积/Area"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps1,
+                }]
+            });
+
+            chart1.render();
+
+            var dps2 = [];
+            var chart2 = new CanvasJS.Chart("chartContainer2", {
+                title: {
+                    text: "熔池宽度/Width"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps2,
+                }]
+            });
+
+            chart2.render();
+            var xVal = 0;
+            // var Socket1 = new WebSocket("ws://192.168.199.101:10004");
+            // Socket1.onopen = function () { }
+            // Socket1.onmessage = function (jdata) {
+            //     document.getElementById('weldpoolPic1').src = "data:image/jpg;base64," + jdata.data;
+            // }
+            var Socket2 = new WebSocket("ws://192.168.199.101:10005");
+            Socket2.onopen = function () { }
+            Socket2.onmessage = function (jdata) {
+                document.getElementById('weldpoolPic1').src = "data:image/jpg;base64," + jdata.data;
+            }
+
+            var Socket3 = new WebSocket("ws://192.168.199.101:10006");
+            Socket3.onopen = function () { }
+            Socket3.onmessage = function (jdata) {
+                var tmpdata;
+                tmpdata = jdata.data.split('|');
+                dps1.push({ x: xVal, y: parseFloat(tmpdata[0]) });
+                dps2.push({ x: xVal, y: parseFloat(tmpdata[1]) });
+                // if (parseFloat(tmpdata[0])>12000) {
+                //     dps3.push({ x: xVal, y: 1 });
+                //     document.getElementById("splash").innerHTML = "可能出现飞溅";
+                // }
+                // else {
+                //     dps3.push({ x: xVal, y: 0 });
+                //     document.getElementById("splash").innerHTML = "不易出现飞溅";
+                // }
+                xVal += 0.5;
+                if (dps1.length>15) {
+                    dps1.shift();
+                    dps2.shift();
+                    //dps3.shift();
+                }
+                chart1.render();
+                chart2.render();
+                //chart3.render();
             }
         });
     }

@@ -13,83 +13,97 @@
 
 <link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
 <style>
-#header {
-    height: 92px;
-    left: 0;
-    top: 0;
-    right: 0;
-    transition: all 0.5s;
-    z-index: 997;
-}
-  
-#header #logo {
-    float: left;
-}
-  
-#header #logo img{
-    width: 40px;
-}
-  
-#header #logo h1 {
-    font-size: 20px;
-    margin: 0;
-    padding: 10px;
-    line-height: 1;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    letter-spacing: 3px;
-    float: right;
-    color: black;
-} 
+    #header {
+        height: 92px;
+        left: 0;
+        top: 0;
+        right: 0;
+        transition: all 0.5s;
+        z-index: 997;
+    }
+    
+    #header #logo {
+        float: left;
+    }
+    
+    #header #logo img{
+        width: 40px;
+    }
+    
+    #header #logo h1 {
+        font-size: 20px;
+        margin: 0;
+        padding: 10px;
+        line-height: 1;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        letter-spacing: 3px;
+        float: right;
+        color: black;
+    } 
 
-#chartContainer {
-    height: 300px;
-    width: 90%;
-    margin-left: 5%;
-}
+    #chartContainer {
+        height: 300px;
+        width: 90%;
+        margin-left: 5%;
+    }
 
-#robot{
-    text-indent: 0;
-    padding: 10px;
-    font-size: 18px;
-    line-height: 1.3;
-    letter-spacing: 3px;
-    font-weight: 500;
-}
+    #robot{
+        text-indent: 0;
+        padding: 10px;
+        font-size: 18px;
+        line-height: 1.3;
+        letter-spacing: 3px;
+        font-weight: 500;
+    }
 
-#intro{
-    text-align: center;
-    height: 0;
-}
+    #intro{
+        text-align: center;
+        height: 0;
+    }
 
-.tableContainer{
-    text-align: center;
-    display: table;
-    margin: 20px;
-    border-spacing: 15px;
-    width: 100%;
-}
-.tableRow{
-    text-align: center;
-    display: table-row;
-}
-.tableCell{
-    display:table-cell;
-    padding: 10px;
-    width: 300px;
-    vertical-align: top;
-}
+    .tableContainer{
+        text-align: center;
+        display: table;
+        margin: 20px;
+        border-spacing: 15px;
+        width: 100%;
+    }
+    .tableRow{
+        text-align: center;
+        display: table-row;
+    }
+    .tableCell{
+        display:table-cell;
+        padding: 10px;
+        width: 300px;
+        vertical-align: top;
+    }
 
-div p {
-    font-size: 25px;
-    margin-top: 5px;
-    padding: 0px;
-    line-height: 1.2;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    letter-spacing: 3px;
-    color: black;
-}
+    div p {
+        font-size: 35px;
+        margin-top: 5px;
+        padding: 0px;
+        line-height: 1.2;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        letter-spacing: 3px;
+        color: black;
+    }
+    .section-header h1 {
+        font-size: 50px;
+        color: #111;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 15px;
+        margin: 0;
+    }
+
+    .section-header h3 {
+        font-size: 35px;
+    }
 </style>
 {% endblock %}
 
@@ -105,7 +119,8 @@ div p {
 </header>
 
 <div class="section-header">
-    <h3 class="section-title">声音信号监控</h3>
+    <h1 class="section-title">声音信号监控</h1>
+    <h3 class="section-title">Sound signal monitoring</h3>
 </div>
 <div style="text-align: center">
     <img style="width: 400px; height: 300px;" src="{% static 'images/PM/声音传感器.jpg'%}">
@@ -127,7 +142,12 @@ div p {
         <div class="tableCell">
             <div id="chartContainer3" style="height: 400px; width: 100%;"></div>
         </div>
-        <div class="tableCell">
+        <div class="tableCell" style="text-align: left; font-size: 30px;">
+            <p>0—当前状态不易出现飞溅</p>
+            <p>1—当前状态可能出现飞溅</p>
+        </br>
+            <!-- <p>当前状态不易出现飞溅</p> -->
+            <p id="splash"></p>
         </div>
     </div>
 </div>
@@ -146,7 +166,7 @@ div p {
             var dps1 = [];
             var chart1 = new CanvasJS.Chart("chartContainer1", {
                 title: {
-                    text: "声音信号"
+                    text: "声音/Sound"
                 },
                 data: [{
                     type: "line",
@@ -159,7 +179,7 @@ div p {
             var dps2 = [];
             var chart2 = new CanvasJS.Chart("chartContainer2", {
                 title: {
-                    text: "频域特征"
+                    text: "时域特征/Time Feature"
                 },
                 data: [{
                     type: "line",
@@ -172,7 +192,7 @@ div p {
             var dps3 = [];
             var chart3 = new CanvasJS.Chart("chartContainer3", {
                 title: {
-                    text: "时域特征"
+                    text: "飞溅倾向/Splash"
                 },
                 data: [{
                     type: "line",
@@ -184,52 +204,65 @@ div p {
 
             var xVal1 = 0;
             var yVal1 = 0;
-            var xVal2 = 0;
-            var yVal2 = 0;
-            var xVal3 = 0;
-            var yVal3 = 0;
-            var Socket = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_sound/1/");
+            var Socket = new WebSocket("ws://192.168.199.101:10001");
             Socket.onopen = function () { }
             Socket.onmessage = function (jdata) {
-                var flag, tmpdata1, tmpdata2, tmpdata3, tmpdata4;
-                dps2.length = 0;
-                flag = parseInt(JSON.parse(jdata.data)['flag']);
-                if  (flag === 0) {
-                    xVal1 = 0;
-                    xVal2 = 0;
-                    xVal3 = 0;
-                }
-                tmpdata1 = JSON.parse(jdata.data)['sound'];
-                tmpdata2 = JSON.parse(jdata.data)['FFTx'];
-                tmpdata3 = JSON.parse(jdata.data)['FFTy'];
-                tmpdata4 = JSON.parse(jdata.data)['pow'];
+                var tmpdata1, counter = 0;
+                tmpdata1 = JSON.parse(jdata.data)['Sound'];
                 for (var i = 0; i < tmpdata1.length; ++i) {
-                    xVal1 = xVal1 + 0.5/tmpdata1.length;
+                    xVal1 = xVal1 + 0.25/tmpdata1.length;
                     yVal1 = parseFloat(tmpdata1[i]);
+                    counter += yVal1;
                     dps1.push({ x: xVal1, y: yVal1 });
                 }
-                if (dps1.length > 8000) {
-                    for (var i = 0; i < 800; ++i) {
+                if (dps1.length > 3000) {
+                    for (var i = 0; i < 1000; ++i) {
                         dps1.shift();
-                        }
+                    }
                 }
-                if (dps3.length > 20) {
-                    for (var i = 0; i < 2; ++i) {
-                        dps3.shift();
-                        }
+                dps2.push({ x: xVal1, y: counter/tmpdata1.length });
+                if (counter/tmpdata1.length>4.6) {
+                    dps3.push({ x: xVal1, y: 1 });
+                    document.getElementById("splash").innerHTML = "可能出现飞溅"
                 }
-                for (var i=0; i<tmpdata2.length; ++i) {
-                    xVal2 = parseFloat(tmpdata2[i]);
-                    yVal2 = parseFloat(tmpdata3[i]);
-                    dps2.push({ x: xVal2, y: yVal2});
+                else {
+                    dps3.push({ x: xVal1, y: 0 });
+                    document.getElementById("splash").innerHTML = "不易出现飞溅"
                 }
-                yVal3 = parseFloat(tmpdata4)
-                dps3.push({ x: xVal3, y: yVal3});
-                xVal3 = xVal3 + 0.5;
+                if (dps2.length>15) {
+                    dps2.shift();
+                    dps3.shift();
+                }
                 chart1.render();
                 chart2.render();
                 chart3.render();
             }
+
+            // var Socket3 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_sound/1/");
+            // Socket3.onopen = function () { }
+            // Socket3.onmessage = function (jdata) {
+            //     var flag, tmpdata;
+            //     flag = parseInt(JSON.parse(jdata.data)['flag']);
+            //     if  (flag === 0) xVal1 = 0;
+            //     tmpdata = JSON.parse(jdata.data)['sound'];
+            //     for (var i = 0; i < 200; ++i) {
+            //         xVal1 += 0.0025;
+            //         yVal1 = parseFloat(tmpdata[i]);
+            //         dps1.push({ x: xVal1, y: yVal1 });
+            //         }
+            //     if (dps1.length > 1000) {
+            //         for (var i = 0; i < 200; ++i) {
+            //             dps1.shift();
+            //             }
+            //         }
+            //     chart1.render();
+            // }
+            // for (var i=0; i<15; ++i) {
+            //     dps2.push({ x: i/10, y: Math.random() })
+            //     dps3.push({ x: i/10, y: 0 })
+            // }
+            // chart2.render();
+            // chart3.render();
         });
     } 
 

@@ -199,9 +199,9 @@ def refresh_robot(request, ID):
 		robot = robot.replace('CURRENT JOINT POSITION','当前角坐标')
 		robot = robot.replace('CURRENT USER FRAME POSITION','当前用户坐标')
 		robot = robot.replace('CURRENT WORLD POSITION','当前世界坐标')
-		robot = robot.replace('Frame #:  0  Tool #:  2</br>','')
+		robot = robot.replace('Frame #:  1  Tool #:  5</br>','')
 		robot = robot.replace('CFG: N U T, 0, 0, 0</br>','')
-		robot = robot.replace('Tool #:  2</br>','')
+		robot = robot.replace('Tool #:  5</br>','')
 		context['robot'] = robot
 		request.websocket.send(json.dumps(context))
 		sleep(0.5)
@@ -295,8 +295,11 @@ def weldpool(request, ID):
 def monitor(request, ID):
 	return render(request, 'Project_Management/monitor.html')
 
-def intro(request, ID):
-	return render(request, 'Project_Management/intro.html')
+def intro1(request, ID):
+	return render(request, 'Project_Management/intro1.html')
+
+def intro2(request, ID):
+	return render(request, 'Project_Management/intro2.html')
 
 def mon(request, ID):
 	return render(request, 'Project_Management/mon.html')

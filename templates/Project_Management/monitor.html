@@ -125,7 +125,7 @@
 
 
 <section id="intro">
-    <a href="http://127.0.0.1:8000/Project_Management/welding_task_detail/1/" class="btn-get-started scrollto">返回</a>
+    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">返回</a>
 </section>
 
 {% endblock %}
@@ -192,20 +192,22 @@
             chart3.render();
             var xVal1 = 0;
             var yVal1 = 0;
-            var Socket1 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_current/1/");
+            var Socket1 = new WebSocket("ws://192.168.199.101:10001");
             Socket1.onopen = function () { }
             Socket1.onmessage = function (jdata) {
                 var flag, tmpdata;
-                flag = parseInt(JSON.parse(jdata.data)['flag']);
-                if  (flag === 0) xVal1 = 0;
-                tmpdata = JSON.parse(jdata.data)['current'];
-                for (var i = 0; i < 200; ++i) {
-                    xVal1 += 0.0025;
+                console.log(jdata)
+                tmpdata = JSON.parse(jdata.data)['Sound'];
+                console.log(tmpdata.length);
+                var interval;
+                interval = 1.0 / 4.0 / tmpdata.length;
+                for (var i = 0; i < tmpdata.length; ++i) {
+                    xVal1 += interval;
                     yVal1 = parseFloat(tmpdata[i]);
                     dps1.push({ x: xVal1, y: yVal1 });
                     }
                 if (dps1.length > 1000) {
-                    for (var i = 0; i < 200; ++i) {
+                    for (var i = 0; i < 500; ++i) {
                         dps1.shift();
                         }
                     }
@@ -264,11 +266,11 @@
                 document.getElementById('robot').innerHTML = tmpdata;
             }
 
-            var Socket5 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_monitor/1/");
-            Socket5.onopen = function () { }
-            Socket5.onmessage = function (jdata) {
-                document.getElementById('monitorpic').src = "data:image/jpg;base64," + JSON.parse(jdata.data)['monitorpic'];                
-            }
+            // var Socket5 = new WebSocket("ws://192.168.199.101:9999");
+            // Socket5.onopen = function () { }
+            // Socket5.onmessage = function (jdata) {
+            //     document.getElementById('monitorpic').src = "data:image/jpg;base64," + jdata['data'];                
+            // }
 
             var Socket6 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_weldpool/1/summary/");
             Socket6.onopen = function () { }

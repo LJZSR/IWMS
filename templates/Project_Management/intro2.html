@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}焊接过程多元传感信息监控平台{% endblock %}
+{% block css %}
+    <link href="{% static 'css/SM/style.css' %}" rel="stylesheet">
+    <link href="{% static "css/INDEX_index/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+
+    <link href="{% static "css/INDEX_index/style.css" %}" rel="stylesheet">
+
+    <link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
+    <style>
+        section {
+            text-align: center;
+        }
+        section p {
+            margin: auto;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            text-align: left;
+            text-indent: 2em;
+            width: 1500px;
+            color: black;
+            font-weight: 500;
+            font-size: 40px;
+        }
+        
+        .section-header h1 {
+            font-size: 50px;
+            color: #111;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+            margin: 0;
+        }
+        .section-header h3 {
+            font-size: 35px;
+        }
+
+        .tableContainer{
+            display: table;
+            width: 100%;
+        }
+        .tableRow{
+            display: table-row;
+        }
+        .tableCell{
+            display:table-cell;
+            vertical-align: top;
+        }
+        .tableCell img {
+            padding: 15px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<header id="header">
+    <div>
+        <div id="logo">
+            <h1>机器人焊接智能化实验室</h1>
+            <img src="{%static 'images/INDEX_index/sjtu.jpeg'%}">
+        </div>
+        <a class="btn-get-started scrollto" href="{% url 'INDEX:exit' %}" style="float: right;">退出</a>
+    </div>
+</header>
+
+<div class="section-header">
+    <h1 class="section-title">机器人弧焊过程多源信息监控平台</h1>
+    <h3 class="section-title">Multi-source information monitoring platform for robot arc welding process</h3>
+</div>
+
+<section id="top-section">
+    <div class="tableContainer">
+        <div class="tableRow">
+            <div class="tableCell" style="text-align: right;">
+                <a href="{% url 'Project_Management:equip' 1 %}" class="btn-get-started scrollto">
+                    <img style="width: 700px; height: 700px;" src="{% static 'images/PM/intro2_1.png'%}">
+                </a>
+            </div>
+            <div class="tableCell" style="text-align: left;">
+                <a href="{% url 'Project_Management:equip' 1 %}" class="btn-get-started scrollto">
+                    <img style="width: 700px; height: 700px;" src="{% static 'images/PM/intro2_2.png'%}">
+                </a>
+            </div>
+        </div>
+        <div class="tableRow">
+            <div class="tableCell" style="text-align: right;">
+                <a href="{% url 'Project_Management:equip' 1 %}" class="btn-get-started scrollto">
+                    <img style="width: 700px; height: 700px;" src="{% static 'images/PM/intro2_3.png'%}">
+                </a>
+            </div>
+            <div class="tableCell" style="text-align: left;">
+                <a href="{% url 'Project_Management:equip' 1 %}" class="btn-get-started scrollto">
+                    <img style="width: 700px; height: 700px;" src="{% static 'images/PM/intro2_4.png'%}">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="intro" style="height: 50px">
+    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">返回</a>
+</section>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/canvasjs.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+{% endblock %}

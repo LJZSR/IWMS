@@ -13,68 +13,81 @@
 
 <link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
 <style>
-#header {
-    height: 92px;
-    left: 0;
-    top: 0;
-    right: 0;
-    transition: all 0.5s;
-    z-index: 997;
-}
-  
-#header #logo {
-    float: left;
-}
-  
-#header #logo img{
-    width: 40px;
-}
-  
-#header #logo h1 {
-    font-size: 20px;
-    margin: 0;
-    padding: 10px;
-    line-height: 1;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    letter-spacing: 3px;
-    float: right;
-    color: black;
-} 
+    #header {
+        height: 92px;
+        left: 0;
+        top: 0;
+        right: 0;
+        transition: all 0.5s;
+        z-index: 997;
+    }
+    
+    #header #logo {
+        float: left;
+    }
+    
+    #header #logo img{
+        width: 40px;
+    }
+    
+    #header #logo h1 {
+        font-size: 20px;
+        margin: 0;
+        padding: 10px;
+        line-height: 1;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        letter-spacing: 3px;
+        float: right;
+        color: black;
+    } 
 
-.tableContainer{
-    text-align: center;
-    display: table;
-    margin: 20px;
-    border-spacing: 15px;
-    width: 100%;
-}
-.tableRow{
-    text-align: center;
-    display: table-row;
-}
-.tableCell{
-    display:table-cell;
-    padding: 10px;
-    width: 300px;
-    vertical-align: top;
-}
+    .tableContainer{
+        text-align: center;
+        display: table;
+        margin: 20px;
+        border-spacing: 15px;
+        width: 100%;
+    }
+    .tableRow{
+        text-align: center;
+        display: table-row;
+    }
+    .tableCell{
+        display:table-cell;
+        padding: 10px;
+        width: 300px;
+        vertical-align: top;
+    }
 
-#intro{
-    text-align: center;
-    height: 0;
-}
+    #intro{
+        text-align: center;
+        height: 0;
+    }
 
-div p {
-    font-size: 25px;
-    margin-top: 5px;
-    padding: 0px;
-    line-height: 1.2;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    letter-spacing: 3px;
-    color: black;
-}
+    div p {
+        font-size: 35px;
+        margin-top: 5px;
+        padding: 0px;
+        line-height: 1.2;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        letter-spacing: 3px;
+        color: black;
+    }
+    .section-header h1 {
+        font-size: 50px;
+        color: #111;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 15px;
+        margin: 0;
+    }
+    .section-header h3 {
+        font-size: 35px;
+    }
 </style>
 {% endblock %}
 
@@ -90,13 +103,37 @@ div p {
 </header>
 
 <div class="section-header">
-    <h3 class="section-title">光谱信息监控</h3>
+    <h1 class="section-title">光谱信息监控</h1>
+    <h3 class="section-title">Spectral information monitoring</h3>
 </div>
 <div style="text-align: center">
-    <img style="width: 600px; height: 300px;" src="{% static 'images/PM/光谱传感器.jpg'%}">
+    <img style="width: 400px; height: 300px;" src="{% static 'images/PM/光谱传感器.jpg'%}">
     <p>
         通过光谱仪采集焊接过程中的光谱信息
     </p>
+    <div class="tableContainer">
+        <div class="tableRow">
+            <div class="tableCell">
+                <div id="chartContainer1" style="height: 400px; width: 100%;"></div>
+            </div>
+            <div class="tableCell">
+                <div id="chartContainer2" style="height: 400px; width: 100%;"></div>
+            </div>
+        </div>
+        <div class="tableRow">
+            <div class="tableCell">
+                <div id="chartContainer3" style="height: 400px; width: 100%;"></div>
+            </div>
+            <div class="tableCell" style="text-align: left; font-size: 30px;">
+                <p>0—当前状态不易出现气孔</p>
+                <p>1—当前状态可能出现气孔</p>
+            </br>
+                <p id="pores"></p>
+                <!-- <p>当前状态不易出现气孔</p> -->
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
@@ -108,5 +145,93 @@ div p {
 {% block script%}
 <script type="text/javascript" src="{% static 'js/canvasjs.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script>
+    window.onload = function () {
+        $(document).ready(function () {
+
+            var dps1 = [];
+            var chart1 = new CanvasJS.Chart("chartContainer1", {
+                title: {
+                    text: "光谱曲线/Spectrum"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps1,
+                }]
+            });
+            
+            var dps2 = [];
+            var chart2 = new CanvasJS.Chart("chartContainer2", {
+                title: {
+                    text: "光谱特征/Spectral Feature"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps2,
+                }]
+            });
+
+            var dps3 = [];
+            var chart3 = new CanvasJS.Chart("chartContainer3", {
+                title: {
+                    text: "气孔倾向/Pores"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps3,
+                }]
+            });
+
+            chart1.render();
+            chart2.render();
+            chart3.render();
+            
+            var xVal1 = 0;            
+            var Socket = new WebSocket("ws://192.168.199.101:10007");
+            Socket.onopen = function () { }
+            Socket.onmessage = function (jdata) {
+                var tmpdata1;
+                var feature;
+                dps1.length = 0;
+                tmpdata1 = JSON.parse(jdata.data)['Spectrum'];
+                feature = JSON.parse(jdata.data)['feature'];
+                for (var i = 0; i < tmpdata1.length; ++i) {
+                    xVal1 = i;
+                    yVal1 = parseFloat(tmpdata1[i]);
+                    dps1.push({ x: xVal1, y: yVal1 });
+                }
+                dps2.push({ x: xVal1, y: feature });
+                if (feature>1.1) {
+                    dps3.push({ x: xVal1, y: 1 });
+                    document.getElementById("pores").innerHTML = "可能出现气孔"
+                }
+                else {
+                    dps3.push({ x: xVal1, y: 0 });
+                    document.getElementById("pores").innerHTML = "不易出现气孔"
+                }
+                if (dps2.length>15) {
+                    dps2.shift();
+                    dps3.shift();
+                }
+                chart1.render();
+                chart2.render();
+                chart3.render();
+            }
+            // for (var i = 0; i < 1024; ++i) {
+            //     xVal1 = i;
+            //     yVal1 = 0 + 0.01*Math.random();
+            //     dps1.push({ x: xVal1, y: yVal1 });
+            // }
+            // for (var i=0; i<15; ++i) {
+            //     dps2.push({ x: i/10, y: Math.random() })
+            //     dps3.push({ x: i/10, y: 0 })
+            // }
+            // chart1.render();
+            // chart2.render();
+            // chart3.render();
+        });
+        
+    }
+</script>
 
 {% endblock %}

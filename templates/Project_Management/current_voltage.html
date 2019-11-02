@@ -13,66 +13,80 @@
 
 <link href="{% static "css/INDEX_index/ionicons.min.css" %}" rel="stylesheet">
 <style>
-#header {
-    height: 92px;
-    left: 0;
-    top: 0;
-    right: 0;
-    transition: all 0.5s;
-    z-index: 997;
-}
-  
-#header #logo {
-    float: left;
-}
-  
-#header #logo img{
-    width: 40px;
-}
-  
-#header #logo h1 {
-    font-size: 20px;
-    margin: 0;
-    padding: 10px;
-    line-height: 1;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    letter-spacing: 3px;
-    float: right;
-    color: black;
-} 
-#intro{
-    text-align: center;
-    height: 0;
-}
+    #header {
+        height: 92px;
+        left: 0;
+        top: 0;
+        right: 0;
+        transition: all 0.5s;
+        z-index: 997;
+    }
+    
+    #header #logo {
+        float: left;
+    }
+    
+    #header #logo img{
+        width: 40px;
+    }
+    
+    #header #logo h1 {
+        font-size: 20px;
+        margin: 0;
+        padding: 10px;
+        line-height: 1;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        letter-spacing: 3px;
+        float: right;
+        color: black;
+    } 
+    #intro{
+        text-align: center;
+        height: 0;
+    }
 
-.tableContainer{
-    text-align: center;
-    display: table;
-    margin: 20px;
-    border-spacing: 15px;
-    width: 100%;
-}
-.tableRow{
-    text-align: center;
-    display: table-row;
-}
-.tableCell{
-    display:table-cell;
-    padding: 10px;
-    width: 300px;
-    vertical-align: top;
-}
-div p {
-    font-size: 25px;
-    margin-top: 5px;
-    padding: 0px;
-    line-height: 1.2;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    letter-spacing: 3px;
-    color: black;
-}
+    .tableContainer{
+        text-align: center;
+        display: table;
+        margin: 20px;
+        border-spacing: 15px;
+        width: 100%;
+    }
+    .tableRow{
+        text-align: center;
+        display: table-row;
+    }
+    .tableCell{
+        display:table-cell;
+        padding: 10px;
+        width: 300px;
+        vertical-align: top;
+    }
+    div p {
+        font-size: 35px;
+        margin-top: 5px;
+        padding: 0px;
+        line-height: 1.2;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        letter-spacing: 3px;
+        color: black;
+    }
+
+    .section-header h1 {
+        font-size: 50px;
+        color: #111;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 15px;
+        margin: 0;
+    }
+    .section-header h3 {
+        font-size: 35px;
+    }
 </style>
 {% endblock %}
 
@@ -88,8 +102,10 @@ div p {
 </header>
 
 <div class="section-header">
-    <h3 class="section-title">电流电压信号监控</h3>
+    <h1 class="section-title">电流电压信号监控</h1>
+    <h3 class="section-title">Current and voltage signal monitoring</h3>
 </div>
+
 <div style="text-align: center">
     <img style="width: 400px; height: 300px;" src="{% static 'images/PM/电流电压传感器.jpg'%}">
     <p>
@@ -103,15 +119,7 @@ div p {
             <div id="chartContainer1" style="height: 400px; width: 100%;"></div>
         </div>
         <div class="tableCell">
-            <div id="chartContainer4" style="height: 400px; width: 100%;"></div>
-        </div>
-    </div>
-    <div class="tableRow">
-        <div class="tableCell">
             <div id="chartContainer2" style="height: 400px; width: 100%;"></div>
-        </div>
-        <div class="tableCell">
-            <div id="chartContainer5" style="height: 400px; width: 100%;"></div>
         </div>
     </div>
     <div class="tableRow">
@@ -119,7 +127,7 @@ div p {
             <div id="chartContainer3" style="height: 400px; width: 100%;"></div>
         </div>
         <div class="tableCell">
-            <div id="chartContainer6" style="height: 400px; width: 100%;"></div>
+            <div id="chartContainer4" style="height: 400px; width: 100%;"></div>
         </div>
     </div>
 </div>
@@ -138,7 +146,7 @@ div p {
             var dps1 = [];
             var chart1 = new CanvasJS.Chart("chartContainer1", {
                 title: {
-                    text: "电流信号"
+                    text: "电流/Current"
                 },
                 data: [{
                     type: "line",
@@ -151,7 +159,7 @@ div p {
             var dps2 = [];
             var chart2 = new CanvasJS.Chart("chartContainer2", {
                 title: {
-                    text: "电流频域特征"
+                    text: "电压/Voltage"
                 },
                 data: [{
                     type: "line",
@@ -164,7 +172,7 @@ div p {
             var dps3 = [];
             var chart3 = new CanvasJS.Chart("chartContainer3", {
                 title: {
-                    text: "电流时域特征"
+                    text: "电流时域特征/Time Feature"
                 },
                 data: [{
                     type: "line",
@@ -177,7 +185,7 @@ div p {
             var dps4 = [];
             var chart4 = new CanvasJS.Chart("chartContainer4", {
                 title: {
-                    text: "电压信号"
+                    text: "电压时域特征/Time Feature"
                 },
                 data: [{
                     type: "line",
@@ -187,129 +195,113 @@ div p {
 
             chart4.render();
 
-            var dps5 = [];
-            var chart5 = new CanvasJS.Chart("chartContainer5", {
-                title: {
-                    text: "电压频域特征"
-                },
-                data: [{
-                    type: "line",
-                    dataPoints: dps5,
-                }]
-            });
-
-            chart5.render();
-
-            var dps6 = [];
-            var chart6 = new CanvasJS.Chart("chartContainer6", {
-                title: {
-                    text: "电压时域特征"
-                },
-                data: [{
-                    type: "line",
-                    dataPoints: dps6,
-                }]
-            });
-
-            chart6.render();
-
             var xVal1 = 0;
             var yVal1 = 0;
             var xVal2 = 0;
             var yVal2 = 0;
             var xVal3 = 0;
-            var yVal3 = 0;
             var xVal4 = 0;
-            var yVal4 = 0;
-            var xVal5 = 0;
-            var yVal5 = 0;
-            var xVal6 = 0;
-            var yVal6 = 0;
-            var Socket1 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_current/1/");
+
+            var Socket1 = new WebSocket("ws://192.168.199.101:10003");
             Socket1.onopen = function () { }
             Socket1.onmessage = function (jdata) {
-                var flag, tmpdata1, tmpdata2, tmpdata3, tmpdata4;
-                dps2.length = 0;
-                flag = parseInt(JSON.parse(jdata.data)['flag']);
-                if  (flag === 0) {
-                    xVal1 = 0;
-                    xVal2 = 0;
-                    xVal3 = 0;
-                }
-                tmpdata1 = JSON.parse(jdata.data)['current'];
-                tmpdata2 = JSON.parse(jdata.data)['FFTx'];
-                tmpdata3 = JSON.parse(jdata.data)['FFTy'];
-                tmpdata4 = JSON.parse(jdata.data)['pow'];
+                var tmpdata1, counter = 0;
+                tmpdata1 = JSON.parse(jdata.data)['Current'];
                 for (var i = 0; i < tmpdata1.length; ++i) {
-                    xVal1 = xVal1 + 0.5/tmpdata1.length;
+                    xVal1 = xVal1 + 0.25/tmpdata1.length;
                     yVal1 = parseFloat(tmpdata1[i]);
+                    counter += yVal1;
                     dps1.push({ x: xVal1, y: yVal1 });
                 }
-                if (dps1.length > 8000) {
-                    for (var i = 0; i < 800; ++i) {
+                if (dps1.length > 3000) {
+                    for (var i = 0; i < 1000; ++i) {
                         dps1.shift();
                     }
                 }
-                if (dps3.length > 20) {
-                    for (var i = 0; i < 2; ++i) {
-                        dps3.shift();
-                    }
+                dps3.push({ x: xVal3, y: counter/tmpdata1.length });
+                xVal3 += 0.25;
+                if (dps3.length>20) {
+                    dps3.shift();
                 }
-                for (var i=0; i<tmpdata2.length; ++i) {
-                    xVal2 = parseFloat(tmpdata2[i]);
-                    yVal2 = parseFloat(tmpdata3[i]);
-                    dps2.push({ x: xVal2, y: yVal2});
-                }
-                yVal3 = parseFloat(tmpdata4)
-                dps3.push({ x: xVal3, y: yVal3});
-                xVal3 = xVal3 + 0.5;
                 chart1.render();
-                chart2.render();
                 chart3.render();
             }
             
-            var Socket2 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_voltage/1/");
+            var Socket2 = new WebSocket("ws://192.168.199.101:10002");
             Socket2.onopen = function () { }
             Socket2.onmessage = function (jdata) {
-                var flag, tmpdata1, tmpdata2, tmpdata3, tmpdata4;
-                dps5.length = 0;
-                flag = parseInt(JSON.parse(jdata.data)['flag']);
-                if  (flag === 0) {
-                    xVal4 = 0;
-                    xVal5 = 0;
-                    xVal6 = 0;
-                }
-                tmpdata1 = JSON.parse(jdata.data)['voltage'];
-                tmpdata2 = JSON.parse(jdata.data)['FFTx'];
-                tmpdata3 = JSON.parse(jdata.data)['FFTy'];
-                tmpdata4 = JSON.parse(jdata.data)['pow'];
+                var tmpdata1, counter = 0;
+                tmpdata1 = JSON.parse(jdata.data)['Voltage'];
                 for (var i = 0; i < tmpdata1.length; ++i) {
-                    xVal4 = xVal4 + 0.5/tmpdata1.length;
-                    yVal4 = parseFloat(tmpdata1[i]);
-                    dps4.push({ x: xVal4, y: yVal4 });
+                    xVal2 = xVal2 + 0.25/tmpdata1.length;
+                    yVal2 = parseFloat(tmpdata1[i]);
+                    counter += yVal2;
+                    dps2.push({ x: xVal2, y: yVal2 });
                 }
-                if (dps4.length > 8000) {
-                    for (var i = 0; i < 800; ++i) {
-                        dps4.shift();
-                        }
+                if (dps2.length > 3000) {
+                    for (var i = 0; i < 1000; ++i) {
+                        dps2.shift();
+                    }
                 }
-                if (dps6.length > 20) {
-                    for (var i = 0; i < 2; ++i) {
-                        dps6.shift();
-                        }
+                dps4.push({ x: xVal4, y: counter/tmpdata1.length });
+                xVal4 += 0.25;
+                if (dps4.length>20) {
+                    dps4.shift();
                 }
-                for (var i=0; i<tmpdata2.length; ++i) {
-                    xVal5 = parseFloat(tmpdata2[i]);
-                    yVal5 = parseFloat(tmpdata3[i]);
-                    dps5.push({ x: xVal5, y: yVal5});
-                }
-                yVal6 = parseFloat(tmpdata4)
-                dps6.push({ x: xVal6, y: yVal6});
-                xVal6 = xVal6 + 0.5;
+                chart2.render();
                 chart4.render();
-                chart5.render();
-                chart6.render();
             }
+
+            // var Socket1 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_current/1/");
+            // Socket1.onopen = function () { }
+            // Socket1.onmessage = function (jdata) {
+            //     var flag, tmpdata, counter = 0;
+            //     flag = parseInt(JSON.parse(jdata.data)['flag']);
+            //     if  (flag === 0) xVal1 = 0;
+            //     tmpdata = JSON.parse(jdata.data)['current'];
+            //     for (var i = 0; i < 200; ++i) {
+            //         xVal1 += 0.0025;
+            //         yVal1 = parseFloat(tmpdata[i]);
+            //         counter += yVal1;
+            //         dps1.push({ x: xVal1, y: yVal1 });
+            //         }
+            //     if (dps1.length > 1000) {
+            //         for (var i = 0; i < 200; ++i) {
+            //             dps1.shift();
+            //         }
+            //     }
+                
+            //     chart1.render();
+            //     chart3.render();
+            // }
+
+            // for (var i=0; i<15; ++i) {
+            //     dps3.push({ x: i/10, y: Math.random() })
+            //     dps4.push({ x: i/10, y: Math.random() })
+            // }
+
+            // var xVal2 = 0;
+            // var yVal2 = 0;
+            // var Socket2 = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_voltage/1/");
+            // Socket2.onopen = function () { }
+            // Socket2.onmessage = function (jdata) {
+            //     var flag, tmpdata;
+            //     flag = parseInt(JSON.parse(jdata.data)['flag']);
+            //     if  (flag === 0) xVal2 = 0;
+            //     tmpdata = JSON.parse(jdata.data)['voltage'];
+            //     for (var i = 0; i < 200; ++i) {
+            //         xVal2 += 0.0025;
+            //         yVal2 = parseFloat(tmpdata[i]);
+            //         dps2.push({ x: xVal2, y: yVal2 });
+            //         }
+            //     if (dps2.length > 1000) {
+            //         for (var i = 0; i < 200; ++i) {
+            //             dps2.shift();
+            //             }
+            //         }
+            //     chart2.render();
+            //     chart4.render();
+            // }
         });
     } 
 

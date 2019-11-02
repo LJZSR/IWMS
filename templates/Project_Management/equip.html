@@ -28,45 +28,55 @@
         }
         #btn1 {
             position: absolute;
-            left: 1420px;
-            top: 70px;
+            left: 1520px;
+            top: 65px;
             color: black;
             font-weight: 500;
-            font-size: 30px;
+            font-size: 40px;
         }
         #btn2 {
             position: absolute;
-            left: 1420px;
-            top: 435px;
+            left: 1520px;
+            top: 315px;
             color: black;
             font-weight: 500;
-            font-size: 30px;
+            font-size: 40px;
         }
         
         #btn3 {
             position: absolute;
-            left: 1420px;
-            top: 560px;
+            left: 1520px;
+            top: 558px;
             color: black;
             font-weight: 500;
-            font-size: 30px;
+            font-size: 40px;
         }
         #btn4 {
             position: absolute;
-            left: 180px;
-            top: 505px;
+            left: 75px;
+            top: 150px;
             color: black;
             font-weight: 500;
-            font-size: 30px;
+            font-size: 40px;
         }
         #btn5 {
             position: absolute;
-            left: 180px;
-            top: 560px;
+            left: 150px;
+            top: 315px;
             color: black;
             font-weight: 500;
-            font-size: 30px;
+            font-size: 40px;
         }
+
+        #btn6 {
+            position: absolute;
+            left: 150px;
+            top: 558px;
+            color: black;
+            font-weight: 500;
+            font-size: 40px;
+        }
+
         .tableContainer{
             text-align: center;
             display: table;
@@ -106,6 +116,21 @@
             letter-spacing: 3px;
             color: black;
         }
+
+        .section-header h1 {
+            font-size: 50px;
+            color: #111;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+            margin: 0;
+        }
+
+        .section-header h3 {
+            font-size: 35px;
+        }
     </style>
 {% endblock %}
 
@@ -122,17 +147,19 @@
 </header>
 
 <div class="section-header">
-    <h3 class="section-title">设备及传感器介绍</h3>
+    <h1 class="section-title">机器人及传感器单元</h1>
+    <h3 class="section-title">Robot and sensor unit</h3>
 </div>
 
 <section id="top-section">
     <div style="position: relative">
         
-        <a href="{% url 'Project_Management:robot' 1 %}" id="btn1" class="btn-get-started scrollto">机器人</a>
-        <a href="{% url 'Project_Management:current_voltage' 1 %}" id="btn2" class="btn-get-started scrollto">电流电压传感器</a>
-        <a href="{% url 'Project_Management:weldpool' 1 %}" id="btn3" class="btn-get-started scrollto">视觉传感器</a>
-        <a href="{% url 'Project_Management:spectrum' 1 %}" id="btn4" class="btn-get-started scrollto">光谱传感器</a>
-        <a href="{% url 'Project_Management:sound' 1 %}" id="btn5" class="btn-get-started scrollto">声音传感器</a>
+        <a href="{% url 'Project_Management:robot' 1 %}" id="btn1" class="btn-get-started scrollto">机器人</br>Robot</a>
+        <a href="{% url 'Project_Management:current_voltage' 1 %}" id="btn2" class="btn-get-started scrollto">电流电压传感器</br>Current&Voltage</a>
+        <a href="{% url 'Project_Management:weldpool' 1 %}" id="btn3" class="btn-get-started scrollto">视觉传感器</br>Weldpool</a>
+        <a href="{% url 'Project_Management:mon' 1 %}" id="btn4" class="btn-get-started scrollto">视频监控传感器</br>Surveillance</a>
+        <a href="{% url 'Project_Management:spectrum' 1 %}" id="btn5" class="btn-get-started scrollto">光谱传感器</br>Spectrum</a>
+        <a href="{% url 'Project_Management:sound' 1 %}" id="btn6" class="btn-get-started scrollto">声音传感器</br>Sound</a>
         <br>
             <img style="width: 1200px; height: 700px;" src="{% static 'images/PM/系统实物图.png'%}">
         <br>

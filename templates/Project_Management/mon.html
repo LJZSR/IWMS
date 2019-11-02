@@ -25,6 +25,22 @@
             font-weight: 500;
             font-size: 30px;
         }
+
+        .section-header h1 {
+            font-size: 50px;
+            color: #111;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+            margin: 0;
+        }
+
+        .section-header h3 {
+            font-size: 35px;
+        }
+
     </style>
 {% endblock %}
 
@@ -41,20 +57,19 @@
 </header>
 
 <div class="section-header">
-    <h3 class="section-title">视频监控</h3>
+    <h1 class="section-title">环境视频监控</h1>
+    <h3 class="section-title">Environmental video surveillance</h3>
 </div>
 
 <section id="top-section">
     <div>
-        <a href="{% url 'Project_Management:equip' 1 %}" class="btn-get-started scrollto">
-            <img id="monitorpic" style="width: 625px; height: 500px;" src="">
-        </a>
+        <img id="monitorpic" style="width: 750px; height: 600px;" src="">
     </div>
     <br>
 </section>
 
 <section id="intro" style="height: 50px">
-    <a href="{% url 'Project_Management:welding_task' %}" class="btn-get-started scrollto">返回</a>
+    <a href="{% url 'Project_Management:equip' 1 %}" class="btn-get-started scrollto">返回</a>
 </section>
 {% endblock %}
 
@@ -64,11 +79,16 @@
     <script>
         window.onload = function () {
             $(document).ready(function () {
-                var Socket = new WebSocket("ws://" + window.location.host + "/Project_Management/1/refresh_monitor/");
+                var Socket = new WebSocket("ws://192.168.199.101:9999");
                 Socket.onopen = function () { }
                 Socket.onmessage = function (jdata) {
-                    document.getElementById('monitorpic').src = "data:image/jpg;base64," + JSON.parse(jdata.data)['monitorpic'];
+                    document.getElementById('monitorpic').src = "data:image/jpg;base64," + jdata.data;
                 }
+                // var Socket = new WebSocket("ws://" + window.location.host + "/Project_Management/1/refresh_monitor/");
+                // Socket.onopen = function () { }
+                // Socket.onmessage = function (jdata) {
+                //     document.getElementById('monitorpic').src = "data:image/jpg;base64," + JSON.parse(jdata.data)['monitorpic'];
+                // }
             });
         }
     </script>

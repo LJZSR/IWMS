@@ -19,11 +19,29 @@
             margin-top: 30px;
             margin-bottom: 30px;
             text-align: left;
-            text-indent: 2em;
             width: 1200px;
             color: black;
             font-weight: 500;
             font-size: 30px;
+        }
+
+        .section-header h1 {
+            font-size: 50px;
+            color: #111;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+            margin: 0;
+        }
+
+        .section-header h3 {
+            font-size: 35px;
+        }
+
+        #robot {
+            text-align: center;
         }
     </style>
 {% endblock %}
@@ -41,7 +59,8 @@
 </header>
 
 <div class="section-header">
-    <h3 class="section-title">焊接机器人位姿监控</h3>
+    <h1 class="section-title">焊接机器人位姿监控</h1>
+    <h3 class="section-title">Welding robot posture monitoring</h3>
 </div>
 
 <section id="top-section">
@@ -59,13 +78,19 @@
     <script>
         window.onload = function () {
             $(document).ready(function () {
-                var Socket = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_robot/1/");
+                var Socket = new WebSocket("ws://192.168.199.101:10000");
                 Socket.onopen = function () { }
                 Socket.onmessage = function (jdata) {
-                    var tmpdata;
-                    tmpdata = JSON.parse(jdata.data)['robot'];
-                    document.getElementById('robot').innerHTML = tmpdata;
+                    console.log(jdata.data)
+                    document.getElementById('robot').innerHTML = jdata.data;
                 }
+                // var Socket = new WebSocket("ws://" + window.location.host + "/Project_Management/refresh_robot/1/");
+                // Socket.onopen = function () { }
+                // Socket.onmessage = function (jdata) {
+                //     var tmpdata;
+                //     tmpdata = JSON.parse(jdata.data)['robot'];
+                //     document.getElementById('robot').innerHTML = tmpdata;
+                // }
             })
         }
     </script>
